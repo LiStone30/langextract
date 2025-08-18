@@ -1,0 +1,19 @@
+{
+  "model_id": "gemma2:2b",
+  "temperature": 0.3,
+  "input_text": "Isaac Asimov was a prolific science fiction writer.",
+  "extractions": [
+    {
+      "class": "author_details",
+      "text": "Isaac Asimov was a prolific science fiction writer.",
+      "attributes": {
+        "name": "Isaac Asimov",
+        "genre": "science fiction"
+      },
+      "char_interval": {
+        "start": 0,
+        "end": 51
+      }
+    }
+  ]
+}

@@ -23,28 +23,30 @@ import json
 import langextract as lx
 
 
-def run_extraction(model_id="gemma2:2b", temperature=0.3):
+def run_extraction(model_id="qwen3:8b", temperature=0.3):
   """Run a simple extraction example using Ollama."""
-  input_text = "Isaac Asimov was a prolific science fiction writer."
+  # input_text = "Isaac Asimov was a prolific science fiction writer."
+  input_text = "晋控创力（山西晋控装备创力智能制造有限公司介绍）成立于2021年9月30日，注册地位于长治市经济技术开发区，注册资本10000万元。公司在煤矿机械领域积极探索智能化、绿色化转型，致力于推动煤机装备升级和制造模式创新。我们希望通过技术创新和工艺优化，提升煤机产品的智能化水平，同时降低能耗与排放，助力行业可持续发展。这一方向既符合国家推动制造业智能化、绿色化升级的政策要求，也是我们立足行业实际、稳步推进产业现代化的重要路径。公司以打造高端智能开采控制技术装备产品为主，研发、制造综采工作面液压支架电液控系统、智能化控制系统、集中供液系统、高端智能乳化液泵站，高端智能喷雾泵站。"
+  
 
-  prompt = "Extract the author's full name and their primary literary genre."
+  # prompt = "Extract the author's full name and their primary literary genre."
+  prompt = "提取出公司、产品的名称、用途、技术参数、使用方法、特点、优势等对公司和产品进行介绍的信息。"
+  
 
   examples = [
       lx.data.ExampleData(
           text=(
-              "J.R.R. Tolkien was an English writer, best known for"
-              " high-fantasy."
+              "山西云晟科技有限公司成立于2015年，坐落于有太行明珠之称的山西省晋城市，并先后在武汉市、西安市、长治市、临汾市、阳泉市成立子分公司。公司注册资金1000万。        云晟科技是国内解决工业行业实操培训的科技公司。公司致力于将AI+XR(VR、MR、APP等)高尖端技术应用于安全教育与培训领域，帮助企业和个人更高效、安全、真实的体验、学习。     "
           ),
           extractions=[
               lx.data.Extraction(
-                  extraction_class="author_details",
+                  extraction_class="公司介绍",
                   extraction_text=(
-                      "J.R.R. Tolkien was an English writer, best known for"
-                      " high-fantasy."
+                      "山西云晟科技有限公司成立于2015年，坐落于有太行明珠之称的山西省晋城市，并先后在武汉市、西安市、长治市、临汾市、阳泉市成立子分公司。公司注册资金1000万。        云晟科技是国内解决工业行业实操培训的科技公司。公司致力于将AI+XR(VR、MR、APP等)高尖端技术应用于安全教育与培训领域，帮助企业和个人更高效、安全、真实的体验、学习。     "
                   ),
                   attributes={
-                      "name": "J.R.R. Tolkien",
-                      "genre": "high-fantasy",
+                      "name": "山西云晟科技有限公司",
+                      "genre": "云晟科技是国内解决工业行业实操培训的科技公司",
                   },
               )
           ],
@@ -142,14 +144,14 @@ def main():
   parser = argparse.ArgumentParser(
       description="Run Ollama extraction example",
       epilog=(
-          "Supported models: gemma2:2b, llama3.2:1b, mistral:7b, qwen2.5:0.5b,"
+          "Supported models: qwen3:8b, gemma2:2b, llama3.2:1b, mistral:7b, qwen2.5:0.5b,"
           " etc."
       ),
   )
   parser.add_argument(
       "--model-id",
-      default=os.getenv("MODEL_ID", "gemma2:2b"),
-      help="Ollama model ID (default: gemma2:2b or MODEL_ID env var)",
+      default=os.getenv("MODEL_ID", "qwen3:8b"),
+      help="Ollama model ID (default: qwen3:8b or MODEL_ID env var)",
   )
   parser.add_argument(
       "--temperature",
