@@ -6,76 +6,28 @@ import docx
 
 # Define comprehensive prompt and examples for complex literary text
 prompt = textwrap.dedent("""\
-    从给定的文本中提取公司、产品和关系信息。
-
-    为每个实体提供有意义的属性，以增加上下文和深度。
-
-    重要提示：
-    1. 使用输入中的精确文本进行提取
-    2. 按出现顺序提取实体，没有重叠的文本跨度
-    3. 确保JSON格式完全正确，包含所有必要的逗号、引号和闭合括号
-    4. 所有中文字符都要用英文双引号包围（使用 " 而不是 "）
-    5. 每个属性值都要用英文双引号包围
-    6. 确保JSON结构完整，不要截断
-    7. 使用英文键名（company, product）而不是中文
-    8. 特别注意：文本中的中文引号要转换为英文引号
-    9. 避免引号嵌套问题，确保每个字符串都正确闭合
+    提取出公司、产品的名称、用途、技术参数、使用方法、特点、优势等对公司和产品进行介绍的信息。
     """)
 
 examples = [
     lx.data.ExampleData(
         text=textwrap.dedent("""\
-            创力（山西晋控装备创力智能制造有限公司介绍）成立于2021年9月30日，注册地位于长治市经济技术开发区，注册资本10000万元。公司在煤矿机械领域积极探索智能化、绿色化转型，致力于推动煤机装备升级和制造模式创新。我们希望通过技术创新和工艺优化，提升煤机产品的智能化水平，同时降低能耗与排放，助力行业可持续发展。这一方向既符合国家推动制造业智能化、绿色化升级的政策要求，也是我们立足行业实际、稳步推进产业现代化的重要路径。公司以打造高端智能开采控制技术装备产品为主，研发、制造综采工作面液压支架电液控系统、智能化控制系统、集中供液系统、高端智能乳化液泵站，高端智能喷雾泵站。
-            FHDA1.6/31.5X电磁先导阀
-            本电磁先导阀是由两组电磁铁驱动的二位三通换向阀组成的。本阀具有体积小、性能可靠、能耗低、维修方便等优点，本阀可单独使用或和电液控换向阀配套使用。
-            结构:卧式
-            公称压力:31.5MPa
-            公称通径:1.6mm  
-            额定工作电压: DC12V
-            工作电流:≤120mA
-            电器接头:M12(圆头)
-            外形尺寸:155mm×84mm×40mm
-            特点：结构简单、可靠、可维护性强， 可自动控制或手动控制。
+            山西云晟科技有限公司成立于2015年，坐落于有太行明珠之称的山西省晋城市，并先后在武汉市、西安市、长治市、临汾市、阳泉市成立子分公司。公司注册资金1000万。
             """),
         extractions=[
             lx.data.Extraction(
-                extraction_class="company",
-                extraction_text="山西晋控装备创力智能制造有限公司",
+                extraction_class="公司介绍",
+                extraction_text=(
+                    "山西云晟科技有限公司成立于2015年，坐落于有太行明珠之称的山西省晋城市，并先后在武汉市、西安市、长治市、临汾市、阳泉市成立子分公司。公司注册资金1000万。        云晟科技是国内解决工业行业实操培训的科技公司。公司致力于将AI+XR(VR、MR、APP等)高尖端技术应用于安全教育与培训领域，帮助企业和个人更高效、安全、真实的体验、学习。     "
+                ),
                 attributes={
-                    "genre": "工业行业实操培训的科技公司",
-                    "establishment_date": "2021年9月30日",
-                    "location": "长治市经济技术开发区",
-                    "capital": "10000万元",
-                    "industry": "煤矿机械",
-                    "development_direction": "智能化、绿色化转型，推动煤机装备升级和制造模式创新",
-                    "core_goal": "提升煤机产品的智能化水平，降低能耗与排放，助力行业可持续发展",
-                    "main_business": "研发、制造综采工作面液压支架电液控系统、智能化控制系统、集中供液系统、高端智能乳化液泵站、高端智能喷雾泵站"
-                }
-            ),
-            lx.data.Extraction(
-                extraction_class="product",
-                extraction_text="FHDA1.6/31.5X电磁先导阀",
-                attributes={
-                    "product_name": "FHDA1.6/31.5X电磁先导阀",
-                    "composition": "由两组电磁铁驱动的二位三通换向阀组成",
-                    "structure": "卧式",
-                    "nominal_pressure": "31.5MPa",
-                    "nominal_diameter": "1.6mm",
-                    "rated_working_voltage": "DC12V",
-                    "working_current": "≤120mA",
-                    "electrical_connector": "M12(圆头)",
-                    "overall_dimensions": "155mm×84mm×40mm",
-                    "advantages": "体积小、性能可靠、能耗低、维修方便",
-                    "features": "结构简单、可靠、可维护性强，可自动控制或手动控制",
-                    "application": "可单独使用或和电液控换向阀配套使用"
-                }
-            ),
-            lx.data.Extraction(
-                extraction_class="relationship",
-                extraction_text="山西晋控装备创力智能制造有限公司制造FHDA1.6/31.5X电磁先导阀",
-                attributes={"type": "制造", "company": "山西晋控装备创力智能制造有限公司", "product": "FHDA1.6/31.5X电磁先导阀"}
-            ),
-            
+                    "name": "山西云晟科技有限公司",
+                    "genre": "云晟科技是国内解决工业行业实操培训的科技公司",
+                    "establishment_date": "2015 年",
+                    "location": "山西省晋城市",
+                    "registered_capital": "1000 万",
+                },
+            )
         ]
     )
 ]
@@ -153,43 +105,6 @@ def run_docx_extraction(model_id="qwen3:8b", temperature=0.3, docx_path="/app/te
         print(f"⚠️  提取过程中出现错误: {e}")
         print("🔄 尝试使用更简单的配置重新提取...")
         
-        # 使用更简单的配置重试
-        simple_model_config = lx.factory.ModelConfig(
-            model_id=model_id,
-            provider_kwargs={
-                "model_url": os.getenv("OLLAMA_HOST", "http://localhost:11434"),
-                "format_type": lx.data.FormatType.JSON,
-                "temperature": 0.05,  # 非常低的温度
-            },
-        )
-        
-        # 简化的提示词
-        simple_prompt = """从文本中提取公司信息，按以下JSON格式输出：
-            {
-            "extractions": [
-                {
-                "company": "公司名称",
-                "company_attributes": {
-                    "name": "公司名称",
-                    "industry": "行业"
-                }
-                }
-            ]
-            }"""
-        
-        result = lx.extract(
-            text_or_documents=text_content,
-            prompt_description=simple_prompt,
-            examples=examples,
-            config=simple_model_config,
-            use_schema_constraints=True,
-            extraction_passes=1,      # 单次提取
-            max_workers=5,            # 更少的并发
-            max_char_buffer=300       # 更小的缓冲区
-        )
-        
-        return result
-
 
 def run_literary_extraction(model_id="qwen3:8b", temperature=0.3, text_source="gutenberg"):
     """Run literary text extraction using Ollama."""

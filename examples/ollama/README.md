@@ -78,27 +78,24 @@ kill 24104
 pip install python-docx
 
 
-### Keywords (Company)
-- Company name: 山西晋控装备创力智能制造有限公司
-- Establishment date: 2021年9月30日
-- Registered address: 长治市经济技术开发区
-- Registered capital: 10000万元
-- Industry: 煤矿机械
-- Development direction: 智能化、绿色化转型，推动煤机装备升级和制造模式创新
-- Core goal: 提升煤机产品的智能化水平，降低能耗与排放，助力行业可持续发展
-- Main business: 研发、制造综采工作面液压支架电液控系统、智能化控制系统、集中供液系统、高端智能乳化液泵站、高端智能喷雾泵站
 
+DEBUG:absl:Initialized Annotator with prompt:
+提取出公司、产品的名称、用途、技术参数、使用方法、特点、优势等对公司和产品进行介绍的信息。
 
-### Keywords (Product)
-- Product name: FHDA1.6/31.5X电磁先导阀
-- Composition: 由两组电磁铁驱动的二位三通换向阀组成
-- Structure: 卧式
-- Nominal pressure: 31.5MPa
-- Nominal diameter: 1.6mm
-- Rated working voltage: DC12V
-- Working current: ≤120mA
-- Electrical connector: M12(圆头)
-- Overall dimensions: 155mm×84mm×40mm
-- Advantages: 体积小、性能可靠、能耗低、维修方便
-- Features: 结构简单、可靠、可维护性强，可自动控制或手动控制
-- Application: 可单独使用或和电液控换向阀配套使用
+Examples
+Q: 山西云晟科技有限公司成立于2015年，坐落于有太行明珠之称的山西省晋城市，并先后在武汉市、西安市、长治市、临汾市、阳泉市成立子分公司。公司注册资金1000万。        云晟科技是国内解决工业行业实操培训的科技公司。公司致力于将AI+XR(VR、MR、APP等)高尖端技术应用于安全教育与培训领域，帮助企业和个人更高效、安全、真实的体验、学习。     
+A: {
+  "extractions": [
+    {
+      "公司介绍": "山西云晟科技有限公司成立于2015年，坐落于有太行明珠之称的山西省晋城市，并先后在武汉市、西安市、长治市、临汾市、阳泉市成立子分公司。公司注册资金1000万。        云晟科技是国内解决工业行业实操培训的科技公司。公司致力于将AI+XR(VR、MR、APP等)高尖端技术应用于安全教育与培训领域，帮助企业和个人更高效、安全、真实的体验、学习。     ",
+      "公司介绍_attributes": {
+        "name": "山西云晟科技有限公司",
+        "genre": "云晟科技是国内解决工业行业实操培训的科技公司"
+      }
+    }
+  ]
+}
+
+Q: 
+A: 
+
