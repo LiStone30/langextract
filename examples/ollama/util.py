@@ -27,4 +27,4 @@ def split_jsonl_to_json_files(jsonl_path, output_dir):
 
 
 if __name__ == "__main__":
-    split_jsonl_to_json_files("/app/AI数字人_qwen3_8b.jsonl", "temp_out_json")    
+    split_jsonl_to_json_files("/app/晋控创力产品介绍文字版_qwen3_8b.jsonl", "temp_out_json")    
